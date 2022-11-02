@@ -5,6 +5,7 @@
     <th>Title</th>
     <th>Content</th>
     <th>Address</th>
+    <th>Category</th>
     <th>User</th>
     <th>Action</th>
   </tr>
@@ -14,6 +15,7 @@
       <td><%= post.title %></td>
       <td><%= post.content %></td>
       <td><%= post.address %></td>
+      <td><%= post.categories.pluck(:disaster).join(',') %></td>
       <td><%= post.user.email %></td>
       <td>
         <%= link_to 'Show', post_path(post) %>
