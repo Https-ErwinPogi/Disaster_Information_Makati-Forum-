@@ -7,6 +7,7 @@
     <th>Address</th>
     <th>Category</th>
     <th>User</th>
+    <th>Comment Counts</th>
     <th>Action</th>
   </tr>
   </thead>
@@ -15,8 +16,9 @@
       <td><%= post.title %></td>
       <td><%= post.content %></td>
       <td><%= post.address %></td>
-      <td><%= post.categories.pluck(:disaster).join(',') %></td>
+      <td><%= post.categories.pluck(:disaster).join(', ') %></td>
       <td><%= post.user.email %></td>
+      <td><%= post.comments_count %></td>
       <td>
         <%= link_to 'Show', post_path(post) %>
         <%= link_to 'Edit', edit_post_path(post) if post.user == current_user %>

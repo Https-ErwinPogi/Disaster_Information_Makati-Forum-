@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :validate_post_owner, only: [:edit, :update, :destroy]
   def index
-    @posts = Post.includes(:user, :categories).all
+    @posts = Post.includes(:user, :categories).order(comments_count: :desc).all
   end
 
   def new
@@ -14,6 +14,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
+      flash[:notice] = 'The post save'
       redirect_to posts_path
     else
       render :new
@@ -27,6 +28,7 @@ class PostsController < ApplicationController
   def update
     @post.user = current_user
     if @post.update(post_params)
+      flash[:notice] = 'The post is up to date'
       redirect_to posts_path
     else
       render :edit
