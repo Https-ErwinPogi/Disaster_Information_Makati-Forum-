@@ -41,6 +41,6 @@ class CategoriesController < ApplicationController
   end
 
   def params_category
-    params.require(:category).permit(:disaster_types)
+    params.require(:category).permit(:disaster)
   end
 end
