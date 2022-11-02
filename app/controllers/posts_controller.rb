@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!,except: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+
   def index
-    @posts = Post.includes(:user).all
+    @posts = Post.includes(:user, :categories).all
   end
 
   def new
@@ -44,6 +45,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params[:post].permit(:title, :content, :address)
+    params.require(:post).permit(:title, :content, :address, category_ids: [])
   end
 end
