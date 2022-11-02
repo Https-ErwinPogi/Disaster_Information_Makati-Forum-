@@ -22,7 +22,10 @@
 
   <div>
     <%= form.collection_check_boxes :category_ids, Category.all, :id, :disaster %>
+    <%= link_to 'Add types', new_category_path %>
   </div>
+
+
 
   <%= form.submit 'Submit' %>
 <% end %>
