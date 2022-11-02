@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_02_052917) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_02_073243) do
+  create_table "categories", charset: "utf8mb4", force: :cascade do |t|
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "content"
     t.bigint "post_id"
@@ -19,6 +25,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_052917) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "post_category_ships", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "post_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_post_category_ships_on_category_id"
+    t.index ["post_id"], name: "index_post_category_ships_on_post_id"
   end
 
   create_table "posts", charset: "utf8mb4", force: :cascade do |t|
