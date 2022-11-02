@@ -1,0 +1,5 @@
+<%= form_with model: category, url: path, data: { turbo: false } do |form| %>
+  <%= form.label :disaster_types %>
+  <%= form.text_field :disaster_types %>
+  <%= form.submit %>
+<% end %>
