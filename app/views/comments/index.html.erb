@@ -2,8 +2,9 @@
 <h2>Comments</h2>
 <ul>
   <% @comments.each do |comment| %>
-  <li><%= comment.content %> (<%= comment.created_at %></li>
+  <li><%= comment.content %> (<%= comment.created_at %>)</li>
     <% end %>
 </ul>
-
+<%= link_to 'New', new_post_comment_path %>
+<br>
 <%= link_to "Post List", posts_path %>
