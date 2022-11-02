@@ -1,0 +1,24 @@
+<%= form_with model: @post do |form| %>
+  <% if @post.errors.any? %>
+    <ul>
+      <% @post.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <strong><%= form.label :title %></strong>
+    <div><%= form.text_field :title %></div>
+  </div>
+  <div>
+    <strong><%= form.label :content %></strong>
+    <div><%= form.text_area :content %></div>
+  </div>
+
+  <div>
+    <strong><%= form.label :address %></strong>
+    <div><%= form.text_field :address %></div>
+  </div>
+
+  <%= form.submit 'Submit' %>
+<% end %>
