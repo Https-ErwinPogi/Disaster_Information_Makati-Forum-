@@ -2,7 +2,7 @@
 <ul>
   <% @categories.each do |category| %>
   <li>
-    <%= category.disaster_types %>
+    <%= category.disaster %>
     <%= link_to 'Edit', edit_category_path(category) %>
     <%= button_to 'Delete', category_path(category), method: :delete %>
   </li>
@@ -10,3 +10,5 @@
 </ul>
 
 <%= link_to 'new', new_category_path %>
+<br>
+<%= link_to 'Post List', posts_path %>
