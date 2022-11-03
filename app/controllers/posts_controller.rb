@@ -36,7 +36,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @post.comments_count == 1
+    if @post.comments_count >= 1
       flash[:notice] = "The post with comments can't be deleted."
     else @post.discard
     flash[:notice] = "The post was successfully deleted."
