@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  include Discard::Model
   default_scope {where(delete_at: nil)}
   validates :title, presence: true
   validates :content, presence: true
