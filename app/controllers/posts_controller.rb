@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
-      flash[:notice] = 'The post save'
+      flash[:notice] = 'The post was successfully saved'
       redirect_to posts_path
     else
       render :new
@@ -36,7 +36,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
+    if @post.comments_count == 1
+      flash[:notice] = "The post with comments can't be deleted."
+      else @post.destroy
+    end
     redirect_to posts_path
   end
 
@@ -52,7 +55,7 @@ class PostsController < ApplicationController
 
   def validate_post_owner
     unless @post.user == current_user
-      flash[:notice] = 'The post not belongs to you'
+      flash[:notice] = 'This post not belongs to you'
       redirect_to posts_path
     end
   end
