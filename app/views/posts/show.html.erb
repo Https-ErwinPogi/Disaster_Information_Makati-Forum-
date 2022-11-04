@@ -1,8 +1,28 @@
-<h1> Show post id: <%= @post.id %></h1>
-<ul>
-  <li>Title: <%= @post.title %></li>
-  <li>Content: <%= @post.content %></li>
-  <li>Address: <%= @post.address %></li>
-</ul>
+  <div class="container">
+    <%= link_to 'Back', posts_path, class:"bi-arrow-left" %>
+    <h2 class="text-center mt-3"><%= @post.title %></h2>
 
-<%= link_to 'Back', posts_path %>
+      <small class="text-muted bi-clock float-lg-end"><%= @post.created_at %></small>
+
+    <div style="font-size: 1.2rem">
+    <p><strong>Category: </strong><%= @post.categories.pluck(:disaster).join(', ') %></p>
+    </div>
+    <div style="font-size: 1.2rem">
+      <p class="text-justify"><strong>Content: </strong><%= @post.content %></p>
+    </div>
+    <div>
+    <p><strong>Address: </strong><%= @post.address %></p>
+    </div>
+    <p><strong>
+      <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Show comments
+      </a></strong></p>
+    <div class="collapse.show mb-5" id="collapseExample">
+      <div class="card card-body">
+        <%= render 'posts/comments' %>
+        <%= render partial: 'posts/form_comments', locals:  {post: @post, comment: @comment} %>
+      </div>
+    </div>
+
+
+  </div>
