@@ -30,6 +30,10 @@
     </tr>
   <% end %>
 </table>
-  <%= paginate @posts %>
+  <%= paginate @posts, theme: 'bootstrap-5',
+               pagination_class: "pagination-sm flex-wrap justify-content-center",
+               nav_class: "d-inline-block" %>
+  <div>
 <%= link_to "New", new_post_path %>
+  </div>
 </div>
