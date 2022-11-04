@@ -2,7 +2,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 </div>
 <div class="col d-flex justify-content-center">
-  <div class="card shadow-sm p-3 mb-10 bg-white rounded" style="width: 25rem">
+  <div class="card shadow-sm p-3 mb-10 bg-white rounded" style="max-width: 25rem; max-height: 40rem">
     <h2 class="text-center">Sign up</h2>
     <p class="text-center">It's free and only takes a minute</p>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
