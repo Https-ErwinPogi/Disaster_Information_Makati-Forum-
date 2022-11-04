@@ -1,31 +1,36 @@
-<%= form_with model: @post do |form| %>
-  <% if @post.errors.any? %>
-    <ul>
-      <% @post.errors.each do |error| %>
-        <li><%= error.full_message %></li>
-      <% end %>
-    </ul>
+<div class="container">
+
+  <%= form_with model: @post do |form| %>
+    <% if @post.errors.any? %>
+      <ul>
+        <% @post.errors.each do |error| %>
+          <li class="text-danger"><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <div class="form-group">
+      <strong><%= form.label :title %></strong>
+      <div><%= form.text_field :title, class: "form-control" %></div>
+    </div>
+    <div class="form-group">
+      <strong><%= form.label :content %></strong>
+      <div><%= form.text_area :content, class: "form-control", style: "min-height: 25rem; resize: none" %></div>
+    </div>
+
+    <div class="form-group">
+      <strong><%= form.label :address %></strong>
+      <div><%= form.text_field :address, class: "form-control" %></div>
+    </div>
+
+    <div>
+      <%= form.collection_check_boxes :category_ids, Category.all, :id, :disaster%>
+      <%= link_to 'Add types', new_category_path %>
+    </div>
+
+      <%= form.submit 'Submit', class: "btn btn-success" %>
+
+
+
+    </div>
+
   <% end %>
-  <div>
-    <strong><%= form.label :title %></strong>
-    <div><%= form.text_field :title %></div>
-  </div>
-  <div>
-    <strong><%= form.label :content %></strong>
-    <div><%= form.text_area :content %></div>
-  </div>
-
-  <div>
-    <strong><%= form.label :address %></strong>
-    <div><%= form.text_field :address %></div>
-  </div>
-
-  <div>
-    <%= form.collection_check_boxes :category_ids, Category.all, :id, :disaster %>
-    <%= link_to 'Add types', new_category_path %>
-  </div>
-
-
-
-  <%= form.submit 'Submit' %>
-<% end %>
