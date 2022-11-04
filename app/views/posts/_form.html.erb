@@ -22,12 +22,12 @@
       <div><%= form.text_field :address, class: "form-control" %></div>
     </div>
 
-    <div>
+    <div class="m-2">
       <%= form.collection_check_boxes :category_ids, Category.all, :id, :disaster%>
-      <%= link_to 'Add types', new_category_path %>
+      <%= link_to 'Add types', new_category_path, class: "btn btn-secondary" %>
     </div>
 
-      <%= form.submit 'Submit', class: "btn btn-success" %>
+      <%= form.submit 'Submit', class: "btn btn-success float-end" %>
 
 
 
