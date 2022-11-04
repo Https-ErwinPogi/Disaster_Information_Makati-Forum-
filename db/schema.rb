@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_03_052107) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_04_012828) do
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "disaster"
     t.datetime "created_at", null: false
@@ -38,14 +38,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_052107) do
 
   create_table "posts", charset: "utf8mb4", force: :cascade do |t|
     t.string "title"
-    t.string "content"
+    t.text "content"
     t.string "address"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "delete_at"
-    t.integer "comments_count", default: 0
     t.datetime "discarded_at"
+    t.integer "comments_count", default: 0
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
