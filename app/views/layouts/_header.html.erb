@@ -9,9 +9,6 @@
           </svg>
         </a></li>
         <li><%= link_to 'Home', posts_path, class: "nav-link px-2 text-white" %></a></li>
-        <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
       </ul>
       <div class="text-end d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end align-content-between">
         <%= button_to 'Login', new_user_session_path, class: "btn btn-outline-light me-2" unless  user_signed_in?%>
