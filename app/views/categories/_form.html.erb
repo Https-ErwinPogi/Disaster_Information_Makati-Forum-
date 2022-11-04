@@ -1,7 +1,13 @@
-<%= form_with model: category, url: path, data: { turbo: false } do |form| %>
-  <%= form.label :disaster %>
-  <%= form.text_field :disaster %>
-  <%= form.submit %>
-<% end %>
+<div class="container">
+  <div class="card-body">
+    <%= form_with model: category, url: path, data: { turbo: false } do |form| %>
+      <%= form.label :disaster %>
+      <%= form.text_field :disaster, class: "form-control mb-4" %>
+      <div class="text-center">
+        <%= form.submit class: "btn btn-success" %>
+      </div>
+    <% end %>
 
-<%= link_to 'Back', new_post_path %>
+    <%= link_to 'Back', new_post_path %>
+  </div>
+</div>
