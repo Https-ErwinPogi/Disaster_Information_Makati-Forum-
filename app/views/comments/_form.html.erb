@@ -1,3 +1,7 @@
+<div class="container">
+  <div class="card-body">
+  <h3>Edit Comment</h3>
+
 <%= form_with model: comment, url: path, data: { turbo: false } do |form| %>
   <% if comment.errors.any? %>
     <ul>
@@ -7,11 +11,14 @@
     </ul>
   <% end %>
   <div>
-    <%= form.label :content %>
-    <%= form.text_field :content %>
+    <strong><%= form.label :content, 'Content:' %></strong>
+    <%= form.text_field :content, class:"form-control mb-2", placeholder: "Comment"%>
   </div>
-
-  <%= form.submit %>
+  <div class="text-center">
+  <%= form.submit class:"btn btn-success"%>
+  </div>
 <% end %>
 
-<%= link_to 'Back', post_comments_path %>
+<%= link_to 'Back', post_path(params[:post_id]), class: "bi-arrow-left" %>
+</div>
+</div>
