@@ -1,14 +1,14 @@
 <div class="container">
 <h1>Disaster Information in Makati [Forum]</h1>
-<table class="table text-center table-striped table-dark">
-  <thead class="thead-dark">
+<table class="table text-center table-bordered table-striped table-dark">
+  <thead class="thead-dark ">
   <tr>
     <th>Title</th>
     <th>Address</th>
     <th>Category</th>
     <th>Author</th>
     <th>Comment Counts</th>
-    <th>Action</th>
+    <th colspan="3">Action</th>
 
   </tr>
   </thead>
@@ -22,11 +22,11 @@
       <td><%= post.user.email %></td>
       <td><%= post.comments_count %> <%= image_tag ('hot.png'), width: "30", height: "30" if @hot_posts.include?(post)%></td>
       <td>
-        <%= link_to 'Read more', post_path(post) %>
-        <%= link_to 'Edit', edit_post_path(post) if post.user == current_user %>
-        <%= button_to 'Delete', post_path(post), method: :delete, :onclick => "return confirm('Are you sure you want to delete?')" if post.user == current_user%>
+        <%= link_to 'Read more', post_path(post) %></td>
+        <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-outline-primary bi-pencil" if post.user == current_user %></td>
+        <td><%= button_to 'Delete', post_path(post), method: :delete, :onclick => "return confirm('Are you sure you want to delete?')", class: "btn btn-outline-danger bi-trash" if post.user == current_user%></td>
         <%#= link_to 'Comment', post_comments_path(post) %>
-      </td>
+
     </tr>
   <% end %>
 </table>
@@ -34,6 +34,6 @@
                pagination_class: "pagination-sm flex-wrap justify-content-center",
                nav_class: "d-inline-block" %>
   <div>
-<%= link_to "New", new_post_path %>
+<%= link_to "New", new_post_path, class: "btn btn-success px-4 mb-4 bi-plus float-lg-end" %>
   </div>
 </div>
