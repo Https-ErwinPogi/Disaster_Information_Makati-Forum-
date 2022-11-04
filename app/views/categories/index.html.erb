@@ -1,14 +1,26 @@
-<h1>Category</h1>
-<ul>
-  <% @categories.each do |category| %>
-  <li>
-    <%= category.disaster %>
-    <%= link_to 'Edit', edit_category_path(category) %>
-    <%= button_to 'Delete', category_path(category), method: :delete %>
-  </li>
-  <% end %>
-</ul>
+<div class="container ">
 
-<%= link_to 'new', new_category_path %>
-<br>
-<%= link_to 'Post List', posts_path %>
+  <div class="card shadow-sm mb-10 bg-white rounded">
+
+    <h1 class="card-header text-center">Category List</h1>
+    <div class="card-body">
+
+      <% @categories.each do |category| %>
+        <div class="m-2">
+          <ul>
+            <li><%= category.disaster %>
+              <%= link_to 'Edit', edit_category_path(category) %>
+              <%= button_to 'Delete', category_path(category), method: :delete, style: "display:inline" %></li>
+          </ul>
+        </div>
+      <% end %>
+
+
+      <%= link_to 'New', new_category_path, class: "bi-plus btn btn-success px-4 float-end" %>
+
+
+    </div>
+
+  </div>
+  <%= link_to 'Home', posts_path, class: "bi-house-fill" %>
+</div>
