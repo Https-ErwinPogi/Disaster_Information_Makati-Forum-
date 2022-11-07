@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!,except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :validate_post_owner, only: [:edit, :update, :destroy]
+
   def index
     @posts = Post.includes(:user, :categories).order(comments_count: :desc).kept.page(params[:page]).per(7)
     @hot_posts = Post.order(comments_count: :desc).limit(3).select{ |post| post.comments_count >= 1 }

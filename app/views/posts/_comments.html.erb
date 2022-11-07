@@ -1,14 +1,14 @@
 <article>
   <% @post.comments.each do |comment| %>
     <div style="display: flex; flex-direction: row; align-items: center">
-    <div>
-    <small class="text-muted"><%= comment.user.email %> </small>
-    <p class=""><%= comment.content %></p>
-    </div>
-    <div style="display: flex; flex-direction: row;">
-      <%= link_to 'Edit', edit_post_comment_path(@post, comment), class: "btn btn-outline-success m-2" if comment.user == current_user%>
-      <%= button_to 'Delete', post_comment_path(@post, comment), method: :delete, :onclick => "return confirm('Are you sure you want to delete?')", class: "btn btn-outline-danger m-2" if comment.user == current_user%>
-    </div>
+      <div>
+        <small class="text-muted"><%= comment.user.email %> </small>
+        <p class=""><%= comment.content %></p>
+      </div>
+      <div style="display: flex; flex-direction: row;">
+        <%= link_to 'Edit', edit_post_comment_path(@post, comment), class: "btn btn-outline-success m-2" if comment.user == current_user %>
+        <%= button_to 'Delete', post_comment_path(@post, comment), method: :delete, :onclick => "return confirm('Are you sure you want to delete?')", class: "btn btn-outline-danger m-2" if comment.user == current_user %>
+      </div>
     </div>
     <small><%= comment.created_at %></small>
     <hr>

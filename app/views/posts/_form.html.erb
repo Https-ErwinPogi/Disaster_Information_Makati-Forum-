@@ -1,5 +1,4 @@
 <div class="container">
-
   <%= form_with model: @post do |form| %>
     <% if @post.errors.any? %>
       <ul>
@@ -23,14 +22,10 @@
     </div>
 
     <div class="m-2">
-      <%= form.collection_check_boxes :category_ids, Category.all, :id, :disaster%>
+      <%= form.collection_check_boxes :category_ids, Category.all, :id, :disaster %>
       <%= link_to 'Add types', new_category_path, class: "btn btn-secondary" %>
     </div>
-
-      <%= form.submit 'Submit', class: "btn btn-success float-end" %>
-
-
+    <%= form.submit 'Submit', class: "btn btn-success float-end" %>
 
     </div>
-
   <% end %>
