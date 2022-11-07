@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_04_012828) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_07_082545) do
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "disaster"
     t.datetime "created_at", null: false
