@@ -8,6 +8,7 @@
     <th>Category</th>
     <th>Author</th>
     <th>Comment Counts</th>
+    <th>IP address</th>
     <th colspan="3">Action</th>
 
   </tr>
@@ -21,6 +22,7 @@
       <td><%= post.categories.pluck(:disaster).join(', ') %></td>
       <td><%= post.user.email %></td>
       <td><%= post.comments_count %> <%= image_tag ('hot.png'), width: "30", height: "30" if @hot_posts.include?(post)%></td>
+      <td><%= post.user.current_sign_in_ip %></td>
       <td>
         <%= link_to 'Read more', post_path(post) %></td>
         <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-outline-primary bi-pencil" if post.user == current_user %></td>
