@@ -20,7 +20,7 @@
   <div class="collapse.show mb-5" id="collapseExample">
     <div class="card card-body">
       <%= render 'posts/comments' %>
-      <%= render partial: 'posts/form_comments', locals: { post: @post, comment: @comment } %>
+      <%= render partial: 'comments/form', locals: { comment: @post.comments.new, path: post_comments_path(@post) } %>
     </div>
   </div>
 </div>

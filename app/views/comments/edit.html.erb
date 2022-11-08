@@ -1,6 +1,13 @@
 <div class="container">
   <div class="card shadow-sm mb-10 bg-white rounded">
     <h1 class="text-center card-header bg-dark text-white"><%= @post.title %></h1>
-    <%= render partial: 'form', locals: { post: @post, comment: @comment, path: post_comment_path(@post, @comment) } %>
+    <div class="container">
+      <div class="card-body">
+        <h3>Edit Comment</h3>
+        <%= render partial: 'form', locals: { comment: @comment, path: post_comment_path(@post, @comment) } %>
+
+        <%= link_to 'Back', post_path(params[:post_id]), class: "bi-arrow-left" %>
+      </div>
+    </div>
   </div>
 </div>
