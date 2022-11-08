@@ -28,7 +28,6 @@ class PostsController < ApplicationController
   def edit ;end
 
   def update
-    @post.user = current_user
     if @post.update(post_params)
       flash[:notice] = 'The post is up to date'
       redirect_to posts_path
