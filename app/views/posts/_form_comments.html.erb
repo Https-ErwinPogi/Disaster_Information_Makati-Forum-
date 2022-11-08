@@ -1,7 +1,0 @@
-<%= form_with model: @post.comments.new, url: post_comments_path(@post), data: { turbo: false } do |form| %>
-  <div class="form-group">
-    <%= form.label 'Write new comment' %>
-    <%= form.text_area :content, class: "form-control my-2", placeholder: "New Comment", required: true %>
-  </div>
-  <%= form.submit 'Post comment', class: "btn btn-success" %>
-<% end %>

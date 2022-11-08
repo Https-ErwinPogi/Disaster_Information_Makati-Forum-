@@ -1,22 +1,7 @@
-<div class="container">
-  <div class="card-body">
-    <h3>Edit Comment</h3>
-    <%= form_with model: comment, url: path, data: { turbo: false } do |form| %>
-      <% if comment.errors.any? %>
-        <ul>
-          <% comment.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-      <div>
-        <strong><%= form.label :content, 'Content:' %></strong>
-        <%= form.text_field :content, class: "form-control mb-2", placeholder: "Comment" %>
-      </div>
-      <div class="text-center">
-        <%= form.submit class: "btn btn-success" %>
-      </div>
-    <% end %>
-    <%= link_to 'Back', post_path(params[:post_id]), class: "bi-arrow-left" %>
+<%= form_with model: comment, url: path, data: { turbo: false } do |form| %>
+  <div class="form-group">
+    <%= form.label 'Write new comment' %>
+    <%= form.text_area :content, class: "form-control my-2", placeholder: "New Comment", required: true %>
   </div>
-</div>
+  <%= form.submit class: "btn btn-success" %>
+<% end %>
