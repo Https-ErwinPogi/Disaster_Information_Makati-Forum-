@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "posts#index"
 
-  resources :posts do
+  resources :posts, path_names: {new: '99', edit: '88'} do
     resources :comments, except: :show
   end
 
