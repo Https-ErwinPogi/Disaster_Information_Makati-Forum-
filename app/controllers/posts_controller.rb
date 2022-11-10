@@ -16,11 +16,11 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if Rails.env.development?
-      @post.user.ip_address = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+      @post.ip_address = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
     else
-      @post.user.ip_address = request.remote_ip
+      @post.ip_address = request.remote_ip
     end
-    if @post.save && @post.user.save
+    if @post.save
       flash[:notice] = 'The post was successfully saved'
       redirect_to posts_path
     else
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :address, :ip_address, category_ids: [])
+    params.require(:post).permit(:title, :content, :address, category_ids: [])
   end
 
   def validate_post_owner
