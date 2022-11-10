@@ -8,7 +8,7 @@
       <th>Category</th>
       <th>Author</th>
       <th>Comment Counts</th>
-      <th>ip address</th>
+      <th>Ip address</th>
       <th colspan="3">Action</th>
     </tr>
     </thead>
@@ -21,12 +21,10 @@
         <td><%= post.categories.pluck(:disaster).join(', ') %></td>
         <td><%= post.user.email %></td>
         <td><%= post.comments_count %> <%= image_tag ('hot.png'), width: "30", height: "30" if @hot_posts.include?(post) %></td>
-       <td><%= Geocoder.search(post.user.current_sign_in_ip).first.city%>, <%= Geocoder.search(post.user.current_sign_in_ip).first.country%></td>
-        <td>
-          <%= link_to 'Read more', post_path(post) %></td>
+        <td><%= Geocoder.search(post.user.ip_address).first.country%></td>
+        <td><%= link_to 'Read more', post_path(post) %></td>
         <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-outline-primary bi-pencil" if post.user == current_user %></td>
         <td><%= button_to 'Delete', post_path(post), method: :delete, :onclick => "return confirm('Are you sure you want to delete?')", class: "btn btn-outline-danger bi-trash" if post.user == current_user %></td>
-        <%#= link_to 'Comment', post_comments_path(post) %>
       </tr>
     <% end %>
   </table>
