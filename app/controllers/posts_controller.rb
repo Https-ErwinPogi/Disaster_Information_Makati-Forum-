@@ -50,6 +50,15 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def short_url
+    # route_list = RouteList.find_by(unique_id: params[:unique_id])
+    # unique_num
+    # post = Post.find_by unique_id: 8998
+    # redirect_to action: "show", id: post.id
+    @post = Post.find_by(unique_id: params[:unique_id])
+    redirect_to post_path(@post)
+  end
+
   private
 
   def set_post
@@ -57,7 +66,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :address, category_ids: [])
+    params.require(:post).permit(:title, :content, :address, :unique_id, category_ids: [])
   end
 
   def validate_post_owner
