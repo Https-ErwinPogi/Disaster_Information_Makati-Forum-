@@ -2,8 +2,8 @@ class Post < ApplicationRecord
   include Discard::Model
   validates :title, presence: true
   validates :content, presence: true
-  validates :address, presence: true
   after_validation :generate_short_string
+  mount_uploader :image, ImageUploader
 
   belongs_to :user
   has_many :comments

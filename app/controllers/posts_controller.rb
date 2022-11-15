@@ -86,7 +86,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :address, :unique_id, category_ids: [])
+    params.require(:post).permit(:title, :content, :address, :unique_id, :image, category_ids: [])
   end
 
   def validate_post_owner

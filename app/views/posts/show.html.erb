@@ -1,5 +1,9 @@
 <div class="container">
   <%= link_to 'Back', posts_path, class: "bi-arrow-left" %>
+  <div class="text-center ">
+    <%= image_tag @post.image.url, class: "rounded" if @post.image? %>
+  </div>
+
   <h2 class="text-center mt-3"><%= @post.title %></h2>
 
   <small class="text-muted bi-clock float-lg-end"><%= @post.created_at %></small>
