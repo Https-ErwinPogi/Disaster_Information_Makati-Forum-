@@ -4,5 +4,4 @@ class Address::Province < ApplicationRecord
 
   belongs_to :region
   has_many :city_municipalities
-  has_many :barangays
 end
