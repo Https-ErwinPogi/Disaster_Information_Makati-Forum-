@@ -4,11 +4,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "posts#index"
 
-  resources :posts do
+  resources :posts, defaults: { format: :json } do
     resources :comments, except: :show
   end
 
   resources :categories
-
   get '/:unique_id', to: 'posts#short_url'
+
+  namespace :api do
+    resources :regions, only: :index, defaults: { format: :json }
+  end
 end
