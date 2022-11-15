@@ -2,13 +2,23 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :validate_post_owner, only: [:edit, :update, :destroy]
+  require 'csv'
 
   def index
     @posts = Post.includes(:user, :categories).order(comments_count: :desc).kept.page(params[:page]).per(7)
-    @hot_posts = Post.order(comments_count: :desc).limit(3).select{ |post| post.comments_count >= 1 }
+    @hot_posts = Post.order(comments_count: :desc).limit(3).select { |post| post.comments_count >= 1 }
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts, each_serializer: PostSerializer }
+      format.csv {
+        csv_string = CSV.generate do |csv|
+          csv << [User.human_attribute_name(:email), Post.human_attribute_name(:id), Post.human_attribute_name(:title), Post.human_attribute_name(:content), Post.human_attribute_name(:categories), Post.human_attribute_name(:created_at)]
+          @posts.each do |p|
+            csv << [p.user.email, p.id, p.title, p.content, p.categories.pluck(:disaster).join(','), p.created_at]
+          end
+        end
+        render plain: csv_string
+      }
     end
   end
 
@@ -36,10 +46,10 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @post, serializer: PostSerializer }
-      end
+    end
   end
 
-  def edit ;end
+  def edit; end
 
   def update
     if @post.update(post_params)
@@ -53,8 +63,9 @@ class PostsController < ApplicationController
   def destroy
     if @post.comments_count >= 1
       flash[:notice] = "The post with comments can't be deleted."
-    else @post.discard
-    flash[:notice] = "The post was successfully deleted."
+    else
+      @post.discard
+      flash[:notice] = "The post was successfully deleted."
     end
     redirect_to posts_path
   end
