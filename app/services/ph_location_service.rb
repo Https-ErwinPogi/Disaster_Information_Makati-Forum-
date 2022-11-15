@@ -44,12 +44,23 @@ class PhLocationService
     data = JSON.parse(request.body)
     data.each do |city_municipality|
       address_city_municipality = Address::CityMunicipality.find_or_initialize_by(code: city_municipality['code'])
-      region = Address::Region.find_by_code(city_municipality['regionCode'])
-      province = Address::Province.find_by_code(city_municipality['provinceCode'])
-      district = Address::District.find_by_code(city_municipality['districtCode'])
+      region = Address::Region.find_or_initialize_by(code: city_municipality['regionCode'])
       address_city_municipality.region = region
-      address_city_municipality.province = province
-      address_city_municipality.district = district
+      if city_municipality['provinceCode']
+        province = Address::Province.find_by_code(city_municipality['provinceCode'])
+        address_city_municipality.province = province
+      elsif city_municipality['districtCode']
+        district = Address::District.find_by_code(city_municipality['districtCode'])
+        address_city_municipality.district = district
+      else
+        if city_municipality['name'] == "City of Isabela"
+          province = Address::Province.find_by_name('Basilan')
+          Address::CityMunicipality.find_or_create_by(code: city_municipality['code'], name: city_municipality['name'], province: province)
+        elsif city_municipality['name'] == "City of Cotabato"
+          province = Address::Province.find_by_name('Maguindanao')
+          Address::CityMunicipality.find_or_create_by(code: city_municipality['code'], name: city_municipality['name'], province: province)
+        end
+      end
       address_city_municipality.name = city_municipality['name']
       address_city_municipality.save
     end
