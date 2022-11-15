@@ -14,10 +14,14 @@ Rails.application.routes.draw do
   namespace :api do
     resources :regions, only: :index, defaults: { format: :json } do
       resources :provinces, only: :index, defaults: { format: :json } do
-        resources :cities_municipalities_provinces, only: :index, defaults: { format: :json }
+        resources :cities_municipalities, only: :index, defaults: { format: :json } do
+          resources :barangays, only: :index, defaults: { format: :json }
+        end
       end
       resources :districts, only: :index, defaults: { format: :json } do
-        resources :cities_municipalities_districts, only: :index, defaults: { format: :json }
+        resources :cities_municipalities, only: :index, defaults: { format: :json } do
+          resources :barangays, only: :index, defaults: { format: :json }
+        end
       end
     end
   end
