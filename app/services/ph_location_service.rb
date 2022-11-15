@@ -77,14 +77,14 @@ class PhLocationService
       if barangay['cityCode']
         address_city_municipality = Address::CityMunicipality.find_by_code(barangay['cityCode'])
         address_barangay = Address::Barangay.find_or_initialize_by(code: barangay['code'])
-        address_city_municipality.city_municipality = address_city_municipality
         address_barangay.name = barangay['name']
+        address_barangay.city_municipality = address_city_municipality
         address_barangay.save
       else
         address_city_municipality = Address::CityMunicipality.find_by_code(barangay['municipalityCode'])
         address_barangay = Address::Barangay.find_or_initialize_by(code: barangay['code'])
-        address_city_municipality.city_municipality = address_city_municipality
         address_barangay.name = barangay['name']
+        address_barangay.city_municipality = address_city_municipality
         address_barangay.save
       end
     end
