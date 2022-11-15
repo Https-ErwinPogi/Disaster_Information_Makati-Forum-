@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "posts#index"
 
-  resources :posts, defaults: { format: :json } do
+  resources :posts do
     resources :comments, except: :show
   end
 
@@ -13,8 +13,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :regions, only: :index, defaults: { format: :json } do
-      resources :provinces, only: :index, defaults: { format: :json }
-      resources :districts, only: :index, defaults: { format: :json }
+      resources :provinces, only: :index, defaults: { format: :json } do
+        resources :cities_municipalities_provinces, only: :index, defaults: { format: :json }
+      end
+      resources :districts, only: :index, defaults: { format: :json } do
+        resources :cities_municipalities_districts, only: :index, defaults: { format: :json }
+      end
     end
   end
 end
