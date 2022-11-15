@@ -74,17 +74,19 @@ class PhLocationService
     request = RestClient.get("#{url}/barangays")
     data = JSON.parse(request.body)
     data.each do |barangay|
-      address_barangay = Address::Barangay.find_or_initialize_by(code: barangay['code'])
-      region = Address::Region.find_by_code(barangay['regionCode'])
-      province = Address::Province.find_by_code(barangay['provinceCode'])
-      district = Address::District.find_by_code(barangay['districtCode'])
-      city_municipality = Address::CityMunicipality.find_by_code(barangay['municipalityCode'])
-      address_barangay.region = region
-      address_barangay.province = province
-      address_barangay.district = district
-      address_barangay.city_municipality = city_municipality
-      address_barangay.name = barangay['name']
-      address_barangay.save
+      if barangay['cityCode']
+        address_city_municipality = Address::CityMunicipality.find_by_code(barangay['cityCode'])
+        address_barangay = Address::Barangay.find_or_initialize_by(code: barangay['code'])
+        address_city_municipality.city_municipality = address_city_municipality
+        address_barangay.name = barangay['name']
+        address_barangay.save
+      else
+        address_city_municipality = Address::CityMunicipality.find_by_code(barangay['municipalityCode'])
+        address_barangay = Address::Barangay.find_or_initialize_by(code: barangay['code'])
+        address_city_municipality.city_municipality = address_city_municipality
+        address_barangay.name = barangay['name']
+        address_barangay.save
+      end
     end
   end
 end
