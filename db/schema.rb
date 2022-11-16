@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_15_050138) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_16_072349) do
   create_table "address_barangays", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -92,6 +92,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_050138) do
     t.integer "comments_count", default: 0
     t.string "ip_address"
     t.string "unique_id"
+    t.string "image"
+    t.bigint "address_region_id"
+    t.bigint "address_province_id"
+    t.bigint "address_city_municipality_id"
+    t.index ["address_city_municipality_id"], name: "index_posts_on_address_city_municipality_id"
+    t.index ["address_province_id"], name: "index_posts_on_address_province_id"
+    t.index ["address_region_id"], name: "index_posts_on_address_region_id"
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
