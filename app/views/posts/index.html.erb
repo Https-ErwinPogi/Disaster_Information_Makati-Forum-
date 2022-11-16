@@ -20,7 +20,7 @@
         <td>
           <%= post.title %>
         </td>
-        <td><%= post.address %></td>
+        <td><%= "#{post.region&.name} #{post.province&.name} #{post.address}" %></td>
         <td><%= post.categories.pluck(:disaster).join(', ') %></td>
         <td><%= post.user.email %></td>
         <td><%= post.comments_count %> <%= image_tag ('hot.png'), width: "30", height: "30" if @hot_posts.include?(post) %></td>
