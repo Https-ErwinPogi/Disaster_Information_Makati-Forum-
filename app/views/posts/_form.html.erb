@@ -1,5 +1,5 @@
 <div class="container">
-  <%= form_with model: @post do |form| %>
+  <%= form_with model: @post, data: { controller: :location } do |form| %>
     <% if @post.errors.any? %>
       <ul>
         <% @post.errors.each do |error| %>
@@ -29,6 +29,19 @@
     <div class="form-group">
       <%= form.label :image %>
       <%= form.file_field :image, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.label :address_region_id %>
+      <%= form.collection_select :address_region_id,
+                                 Address::Region.all, :id, :name,
+                                 { prompt: 'Select region' },
+                                 data: { location_target: 'selectedRegionId', action: 'change->location#fetchProvinces' }%>
+    </div>
+
+    <div>
+      <%= form.label :address_province_id %>
+      <%= form.collection_select :address_province_id, [], nil, nil, { prompt: 'Select province' }, data: { location_target: 'selectProvinceId' } %>
     </div>
     <%= form.submit 'Submit', class: "btn btn-success float-end" %>
 
