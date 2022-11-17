@@ -16,7 +16,8 @@
 <%= render 'layouts/header' %>
 <p class="notice text-center"><%= notice %></p>
 <p class="alert text-center" style="color: red"><%= alert %></p>
-
+<%= link_to "EN", params.permit!.merge(locale: 'en') %>
+<%= link_to "zh-CN", params.permit!.merge(locale: 'zh-CN') %>
 <%= yield %>
 
 <%= render 'layouts/footer' %>
