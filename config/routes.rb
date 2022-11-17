@@ -2,17 +2,19 @@ Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
-  root "posts#index"
-
-  resources :posts do
-    resources :comments, except: :show
+  # root "posts#index"
+  constraints(ClientDomainConstraint.new) do
+    resources :posts do
+      resources :comments, except: :show
+    end
   end
-
   resources :categories
   get '/:unique_id', to: 'posts#short_url'
 
-  namespace :admin do
-    resources :users
+  constraints(AdminDomainConstraint.new) do
+    namespace :admin do
+      resources :users
+    end
   end
 
   namespace :api do
