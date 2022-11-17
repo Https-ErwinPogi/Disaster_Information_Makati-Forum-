@@ -4,7 +4,8 @@
   <table class="table text-center table-bordered table-striped table-dark">
     <thead class="thead-dark ">
     <tr>
-      <th>Title</th>
+      <th><%= Post.human_attribute_name(:title) %></th>
+      <th><%= Post.human_attribute_name(:content) %></th>
       <th>Address</th>
       <th>Category</th>
       <th>Author</th>
@@ -20,6 +21,7 @@
         <td>
           <%= post.title %>
         </td>
+        <td><%= post.content %></td>
         <td><%= "#{post.region&.name} #{post.province&.name} #{post.address}" %></td>
         <td><%= post.categories.pluck(:disaster).join(', ') %></td>
         <td><%= post.user.email %></td>
