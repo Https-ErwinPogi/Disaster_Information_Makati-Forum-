@@ -12,14 +12,11 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 
-<body style="min-height: 100vh; display: flex; flex-direction: column">
+<body class="d-flex flex-column min-vh-100">
 <%= render 'layouts/header' %>
 <p class="notice text-center"><%= notice %></p>
 <p class="alert text-center" style="color: red"><%= alert %></p>
-<%= link_to "EN", params.permit!.merge(locale: 'en') %>
-<%= link_to "zh-CN", params.permit!.merge(locale: 'zh-CN') %>
-<%= yield %>
-
+<div class="wrapper flex-grow-1 mb-5"><%= yield %></div>
 <%= render 'layouts/footer' %>
 
 </body>

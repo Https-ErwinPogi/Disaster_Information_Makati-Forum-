@@ -1,5 +1,4 @@
 <header class="p-3 text-bg-dark">
-  <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="/" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
@@ -12,10 +11,9 @@
           <%= t("hello", name: current_user.email) if current_user %></li>
       </ul>
       <div class="text-end d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end align-content-between">
-        <%= button_to 'Login', new_user_session_path, class: "btn btn-outline-light me-2" unless user_signed_in? %>
-        <%= button_to 'Sign-up', user_registration_path, class: "btn btn-warning" unless user_signed_in? %>
-        <%= button_to 'Logout', destroy_user_session_path, class: "btn btn-outline-danger", method: :delete if user_signed_in? %>
+        <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-light me-2" unless user_signed_in? %>
+        <%= link_to 'Sign-up', user_registration_path, class: "btn btn-warning" unless user_signed_in? %>
+        <%= link_to 'Logout', destroy_user_session_path, class: "btn btn-outline-danger", method: :delete if user_signed_in? %>
       </div>
     </div>
-  </div>
 </header>
