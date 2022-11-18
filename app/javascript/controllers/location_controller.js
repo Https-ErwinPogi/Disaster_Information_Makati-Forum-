@@ -20,4 +20,23 @@ export default class extends Controller {
             }
         })
     }
+
+    fetchCitiesMunicipalities() {
+        let target = this.selectCityMunicipalityIdTarget
+        $(target).empty();
+        $.ajax({
+            type: 'GET',
+            url: '/api/regions/' + this.selectedRegionIdTarget.value + '/provinces/' + this.selectProvinceIdTarget.value + '/cities_municipalities/',
+            dataType: 'json',
+            success: (response) => {
+                console.log(response)
+                $.each(response, function (index, record) {
+                    let option = document.createElement('option')
+                    option.value = record.id
+                    option.text = record.name
+                    target.appendChild(option)
+                })
+            }
+        })
+    }
 }

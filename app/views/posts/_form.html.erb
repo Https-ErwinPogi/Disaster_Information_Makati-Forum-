@@ -40,5 +40,9 @@
     </div>
     <%= form.submit 'Submit', class: "btn btn-success float-end" %>
 
+      <div>
+        <%= form.label :address_city_municipality_id %>
+        <%= form.collection_select :address_city_municipality_id, [], nil, nil, { prompt: 'Select City/Municipality' }, data: { location_target: 'selectCityMunicipalityId', action: 'change->location#fetchBarangays' }, class: "form-control" %>
+      </div>
     </div>
   <% end %>
