@@ -29,8 +29,8 @@
         <td><%= link_to "#{post.unique_id}",post.unique_id %></td>
         <td><%= Geocoder.search(post.ip_address).first.country%></td>
         <td><%= link_to 'Read more', post_path(post) %></td>
-        <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-outline-primary bi-pencil" if post.user == current_user %></td>
-        <td><%= button_to 'Delete', post_path(post), method: :delete, :onclick => "return confirm('Are you sure you want to delete?')", class: "btn btn-outline-danger bi-trash" if post.user == current_user %></td>
+        <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-outline-primary bi-pencil" if policy(post).edit? %></td>
+        <td><%= button_to 'Delete', post_path(post), method: :delete, :onclick => "return confirm('Are you sure you want to delete?')", class: "btn btn-outline-danger bi-trash" if policy(post).destroy? %></td>
         <td data-controller="clipboard">
           <span data-clipboard-target="email"><%= post.user.email %></span>
           <button data-action="click->clipboard#copy">copy</button>
