@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :validate_post_owner, only: [:edit, :update, :destroy]
+  # before_action :validate_post_owner, only: [:edit, :update, :destroy]
   require 'csv'
 
   def index
@@ -49,9 +49,12 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @post, :edit?, policy_class: PostPolicy
+  end
 
   def update
+    authorize @post, :update?, policy_class: PostPolicy
     if @post.update(post_params)
       flash[:notice] = 'The post is up to date'
       redirect_to posts_path
@@ -61,6 +64,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize @post, :destroy?, policy_class: PostPolicy
     if @post.comments_count >= 1
       flash[:notice] = "The post with comments can't be deleted."
     else
@@ -89,10 +93,10 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content, :address, :unique_id, :image, :address_region_id, :address_province_id, category_ids: [])
   end
 
-  def validate_post_owner
-    unless @post.user == current_user
-      flash[:notice] = 'This post not belongs to you'
-      redirect_to posts_path
-    end
-  end
+  # def validate_post_owner
+  #   unless @post.user == current_user
+  #     flash[:notice] = 'This post not belongs to you'
+  #     redirect_to posts_path
+  #   end
+  # end
 end
