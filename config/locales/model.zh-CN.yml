@@ -8,3 +8,11 @@ zh-CN:
       post:
         title: 標題
         content: 內容
+        address: 地址
+        category: 类别
+        author: 作者
+        comments_count: 评论数
+        shorten_url: 缩短 url
+        ip_address: ip 地址
+        action: 行动
+        copy_clipboard: 复制剪贴板
