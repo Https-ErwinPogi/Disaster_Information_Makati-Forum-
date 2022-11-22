@@ -1,0 +1,6 @@
+<%= form_with model: @order, url: top_ups_path do |form| %>
+  <%= form.label :amount %>
+  <%= form.number_field :amount %>
+
+  <%= form.submit %>
+<% end %>
