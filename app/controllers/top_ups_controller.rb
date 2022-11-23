@@ -10,5 +10,7 @@ class TopUpsController < ApplicationController
     @order.amount = params[:order][:amount]
     @order.user = current_user
     @order.save
+    # job
+    OrderSlackNotifyJob.perform_later(@order.id)
   end
 end
